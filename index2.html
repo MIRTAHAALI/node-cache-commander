@@ -1,0 +1,141 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-Time Updates with WebSocket</title>
+    <style>
+      .menubar {
+        width: 100%;
+        height: 50px;
+        background-color: red;
+        display: flex;
+        justify-content: space-between;
+      }
+      .menubar-left {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      @media (max-width: 480px) {
+        .menubar {
+          background-color: yellow;
+        }
+      }
+    </style>
+  </head>
+  <body style="margin: 0">
+    <div style="display: flex; flex-direction: column; height: 100vh">
+      <div class="menubar">
+        <div class="menubar-left">Menu</div>
+        <img src="tut-5.png" />
+      </div>
+      <div
+        style="
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          background-color: aqua;
+          height: 800px;
+        "
+      >
+        <div
+          style="
+            width: 20%;
+            min-width: 200px;
+            background-color: aquamarine;
+            height: 100%;
+            overflow: auto;
+          "
+        >
+          <div style="width: auto">
+            <input style="width: 100%" placeholder="Search" />
+          </div>
+          <ul id="myUL" style="padding: 5px">
+            <li>
+              <span class="caret">Beverages</span>
+              <ul class="nested">
+                <li>Water</li>
+                <li>Coffee</li>
+                <li>
+                  <span class="caret">Tea</span>
+                  <ul class="nested">
+                    <li>Black Tea</li>
+                    <li>White Tea</li>
+                    <li>
+                      <span class="caret">Green Tea</span>
+                      <ul class="nested">
+                        <li>Sencha</li>
+                        <li>Gyokuro</li>
+                        <li>Matcha</li>
+                        <li>Pi Lo Chun</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div
+          style="
+            flex: 1;
+            background-color: lightcoral;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <div style="width: 100%; display: flex; justify-content: right">
+            <button>Settings</button>
+          </div>
+          <div
+            style="
+              
+              background-color: white;
+              height: 100%;
+              padding: 5px;
+              display: flex;
+              flex-direction: column;
+            "
+          >
+            <div style="display: flex; flex-direction: row">
+              <p>Value:</p>
+              <button>Edit</button><button>Close</button><button>Save</button>
+            </div>
+            <div id="edit-value-div" style="flex: 1;width: 100%;background-color: red;display: flex;flex-direction: column;">
+              <textarea style="flex:1"></textarea><button>Clear</button>
+            </div>
+            <div style="">
+              adasds adas a dsa dsa dsa dasd sadsa dsad adsadasd sad sadsa dsa
+              dsa dsad sa dsa da dsad sa dsd sa dasd sad ad sad asd
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <h1>Real-Time Updates</h1>
+    <p id="data">Waiting for updates...</p> -->
+
+    <script>
+      function editValue() {
+        document.getElementById("edit-value-div").style.display = "flex";
+      }
+      function showValue() {}
+      // Connect to the WebSocket server
+      const socket = new WebSocket("ws://localhost:3000");
+
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        document.getElementById("data").innerText = data.message;
+      };
+
+      socket.onerror = (error) => {
+        console.error("WebSocket Error:", error);
+      };
+    </script>
+  </body>
+</html>
