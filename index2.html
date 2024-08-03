@@ -6,24 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Real-Time Updates with WebSocket</title>
     <style>
-      .menubar {
-        width: 100%;
-        height: 50px;
-        background-color: red;
-        display: flex;
-        justify-content: space-between;
+            ul, #myUL {
+        list-style-type: none;
       }
-      .menubar-left {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+
+      #myUL {
+        margin: 0;
+        padding: 0;
       }
-      @media (max-width: 480px) {
-        .menubar {
-          background-color: yellow;
-        }
+
+      .caret {
+        cursor: pointer;
+        -webkit-user-select: none; /* Safari 3.1+ */
+        -moz-user-select: none; /* Firefox 2+ */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none;
       }
+
+      .caret::before {
+        content: "\25B6";
+        color: black;
+        display: inline-block;
+        margin-right: 6px;
+      }
+
+      .caret-down::before {
+        -ms-transform: rotate(90deg); /* IE 9 */
+        -webkit-transform: rotate(90deg); /* Safari */'
+        transform: rotate(90deg);
+      }
+
+      .nested {
+        display: none;
+      }
+
+      .active {
+        display: block;
+      }
+            .menubar {
+              width: 100%;
+              height: 50px;
+              background-color: red;
+              display: flex;
+              justify-content: space-between;
+            }
+            .menubar-left {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+            @media (max-width: 480px) {
+              .menubar {
+                background-color: yellow;
+              }
+            }
     </style>
   </head>
   <body style="margin: 0">
@@ -54,16 +91,7 @@
           <div style="width: auto">
             <input style="width: 100%" placeholder="Search" />
           </div>
-          <ul id="myUL" style="padding: 5px">
-            <li>
-              <span class="caret">Beverages</span>
-              <ul class="nested">
-                <li>Water</li>
-                <li>Coffee</li>
-              </ul>
-            </li>
-          </ul>
-          <ul id="myUL" style="padding: 5px">
+          <ul id="myUL">
             <li>
               <span class="caret">Beverages</span>
               <ul class="nested">
@@ -149,8 +177,8 @@
         </div>
       </div>
     </div>
-    <!-- <h1>Real-Time Updates</h1>
-    <p id="data">Waiting for updates...</p> -->
+    <h1>Real-Time Updates</h1>
+    <p id="data">Waiting for updates...</p>
 
     <script>
       var settingToggle = false;
@@ -165,26 +193,7 @@
         }
         settingToggle = !settingToggle;
       }
-      let testValue = [
-        {
-          name: "test1",
-          data: [
-            {
-              key: "Water",
-              value: "Water1",
-              ttle: 21323
-            },
-            {
-              key: "Coal",
-              value: "Coal1",
-              ttl: 2342143
-            },
-            {
-              key: "Dummy",
-            },
-          ],
-        },
-      ];
+      
       function editValue() {
         document.getElementById("edit-value-div").style.display = "flex";
         document.getElementById("value-div").style.display = "none";
@@ -203,14 +212,36 @@
       // Connect to the WebSocket server
       const socket = new WebSocket("ws://localhost:3000");
 
+
+      setInterval(()=>{
+        socket.send('abc');
+      },3000)
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
+        if (data.m == "init-tree") {
+            console.log(data);
+        }
         document.getElementById("data").innerText = data.message;
       };
 
       socket.onerror = (error) => {
         console.error("WebSocket Error:", error);
       };
+
+      function initToggler() {
+        var toggler = document.getElementsByClassName("caret");
+        var i;
+
+        for (i = 0; i < toggler.length; i++) {
+          toggler[i].addEventListener("click", function () {
+            this.parentElement
+              .querySelector(".nested")
+              .classList.toggle("active");
+            this.classList.toggle("caret-down");
+          });
+        }
+      }
+      initToggler();
     </script>
   </body>
 </html>

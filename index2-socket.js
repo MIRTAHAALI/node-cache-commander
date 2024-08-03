@@ -3,11 +3,36 @@ const http = require("http");
 const WebSocket = require("ws");
 const path = require("path");
 const fs = require("fs");
+const NodeCache = require("node-cache");
+const myCache = new NodeCache();
+const myCache2 = new NodeCache();
 
+function initResponse(ws) {
+  const nodechaches = [
+    {
+      name: "data1",
+      v: myCache,
+      keys: myCache.keys()
+    },
+    {
+      name: "data2",
+      v: myCache2,
+      keys: myCache2.keys()
+    },
+  ];
+
+  const n = nodechaches.map((nc) => ({ name: nc.name, keys: nc.keys}));
+
+  ws.send(JSON.stringify({ m: "init-tree", data: n}));
+}
+const obj = { my: "Special", variable: 42 };
+myCache.set("myKey", obj, 10000);
+myCache2.set("myKey", obj, 10000);
 const PORT = 3000;
 // Define username and password
-const USERNAME = 'admin';
-const PASSWORD = 'password';
+const USERNAME = "admin";
+const PASSWORD = "password";
+
 // Create HTTP server
 const server = http.createServer((req, res) => {
   const auth = req.headers.authorization;
@@ -51,10 +76,12 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", (ws) => {
   console.log("Client connected");
-
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
   // Send initial message
   ws.send(JSON.stringify({ message: "Welcome!" }));
-
+  initResponse(ws);
   // Send updates every 5 seconds (for demo purposes)
   const intervalId = setInterval(() => {
     const data = JSON.stringify({
@@ -73,3 +100,25 @@ wss.on("connection", (ws) => {
 server.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });
+
+
+let testValue = [
+  {
+    name: "test1",
+    data: [
+      {
+        key: "Water",
+        value: "Water1",
+        ttle: 21323,
+      },
+      {
+        key: "Coal",
+        value: "Coal1",
+        ttl: 2342143,
+      },
+      {
+        key: "Dummy",
+      },
+    ],
+  },
+];

@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\index-auth.js"
+            "program": "${workspaceFolder}/index2-socket.js"
         }
     ]
 }
