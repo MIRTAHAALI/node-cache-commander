@@ -60,22 +60,15 @@
               <ul class="nested">
                 <li>Water</li>
                 <li>Coffee</li>
-                <li>
-                  <span class="caret">Tea</span>
-                  <ul class="nested">
-                    <li>Black Tea</li>
-                    <li>White Tea</li>
-                    <li>
-                      <span class="caret">Green Tea</span>
-                      <ul class="nested">
-                        <li>Sencha</li>
-                        <li>Gyokuro</li>
-                        <li>Matcha</li>
-                        <li>Pi Lo Chun</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul id="myUL" style="padding: 5px">
+            <li>
+              <span class="caret">Beverages</span>
+              <ul class="nested">
+                <li>Water</li>
+                <li>Coffee</li>
               </ul>
             </li>
           </ul>
@@ -90,11 +83,11 @@
           "
         >
           <div style="width: 100%; display: flex; justify-content: right">
-            <button>Settings</button>
+            <button onclick="settingToggleFunc()">Settings</button>
           </div>
           <div
+            id="main-div"
             style="
-              
               background-color: white;
               height: 100%;
               padding: 5px;
@@ -103,15 +96,54 @@
             "
           >
             <div style="display: flex; flex-direction: row">
-              <p>Value:</p>
-              <button>Edit</button><button>Close</button><button>Save</button>
+              <p>Key (ttl)</p>
+              <button id="button-edit" onclick="editValue()">Edit</button
+              ><button
+                id="button-show-value"
+                style="display: none"
+                onclick="showValue()"
+              >
+                Close</button
+              ><button id="button-save" style="display: none">Save</button>
             </div>
-            <div id="edit-value-div" style="flex: 1;width: 100%;background-color: red;display: flex;flex-direction: column;">
-              <textarea style="flex:1"></textarea><button>Clear</button>
+            <div
+              id="edit-value-div"
+              style="
+                flex: 1;
+                width: 100%;
+                background-color: red;
+                display: none;
+                flex-direction: column;
+              "
+            >
+              <textarea style="flex: 1"></textarea><button>Clear</button>
             </div>
-            <div style="">
+            <div id="value-div" style="">
               adasds adas a dsa dsa dsa dasd sadsa dsad adsadasd sad sadsa dsa
               dsa dsad sa dsa da dsad sa dsd sa dasd sad ad sad asd
+            </div>
+          </div>
+          <div
+            id="setting-div"
+            style="
+              background-color: white;
+              height: 100%;
+              padding: 5px;
+              display: none;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            <div>
+              <p>Settings</p>
+              <p>Stats</p>
+              <p>keys</p>
+              <p>hits</p>
+              <p>misses</p>
+              <p>ksize</p>
+              <p>vsize</p>
+              <button>Flush All</button>
             </div>
           </div>
         </div>
@@ -121,10 +153,53 @@
     <p id="data">Waiting for updates...</p> -->
 
     <script>
+      var settingToggle = false;
+
+      function settingToggleFunc() {
+        if (settingToggle) {
+          document.getElementById("main-div").style.display = "flex";
+          document.getElementById("setting-div").style.display = "none";
+        } else {
+          document.getElementById("main-div").style.display = "none";
+          document.getElementById("setting-div").style.display = "flex";
+        }
+        settingToggle = !settingToggle;
+      }
+      let testValue = [
+        {
+          name: "test1",
+          data: [
+            {
+              key: "Water",
+              value: "Water1",
+              ttle: 21323
+            },
+            {
+              key: "Coal",
+              value: "Coal1",
+              ttl: 2342143
+            },
+            {
+              key: "Dummy",
+            },
+          ],
+        },
+      ];
       function editValue() {
         document.getElementById("edit-value-div").style.display = "flex";
+        document.getElementById("value-div").style.display = "none";
+        document.getElementById("button-edit").style.display = "none";
+        document.getElementById("button-save").style.display = "";
+        document.getElementById("button-show-value").style.display = "";
       }
-      function showValue() {}
+      function showValue() {
+        document.getElementById("edit-value-div").style.display = "none";
+        document.getElementById("value-div").style.display = "";
+        document.getElementById("button-edit").style.display = "";
+        document.getElementById("button-save").style.display = "none";
+        document.getElementById("button-show-value").style.display = "none";
+      }
+
       // Connect to the WebSocket server
       const socket = new WebSocket("ws://localhost:3000");
 
