@@ -12,18 +12,18 @@ function initResponse(ws) {
     {
       name: "data1",
       v: myCache,
-      keys: myCache.keys()
+      keys: myCache.keys(),
     },
     {
       name: "data2",
       v: myCache2,
-      keys: myCache2.keys()
+      keys: myCache2.keys(),
     },
   ];
 
-  const n = nodechaches.map((nc) => ({ name: nc.name, keys: nc.keys}));
+  const n = nodechaches.map((nc) => ({ name: nc.name, keys: nc.keys }));
 
-  ws.send(JSON.stringify({ m: "init-tree", data: n}));
+  ws.send(JSON.stringify({ m: "init-tree", data: n }));
 }
 const obj = { my: "Special", variable: 42 };
 myCache.set("myKey", obj, 10000);
@@ -52,23 +52,31 @@ const server = http.createServer((req, res) => {
     res.end("Unauthorized");
     return;
   }
-  if (req.url === "/") {
-    // Serve the HTML file
-    const filePath = path.join(__dirname, "index2.html");
-    fs.readFile(filePath, "utf8", (err, html) => {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("500 Internal Server Error");
-        console.error(err);
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(html);
-    });
-  } else {
-    res.writeHead(404, { "Content-Type": "text/plain" });
-    res.end("404 Not Found");
-  }
+  let filePath = path.join(__dirname, req.url === "/" ? "index2.html" : req.url);
+
+  fs.readFile(filePath, (err, content) => {
+    if (err) {
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end("404 Not Found");
+      return;
+    }
+
+    let extname = path.extname(filePath);
+    let contentType = "text/html";
+
+    switch (extname) {
+      case ".js":
+        contentType = "application/javascript";
+        break;
+      case ".css":
+        contentType = "text/css";
+        break;
+      // Add more cases as needed
+    }
+
+    res.writeHead(200, { "Content-Type": contentType });
+    res.end(content);
+  });
 });
 
 // Create WebSocket server
@@ -76,8 +84,8 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", (ws) => {
   console.log("Client connected");
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
+  ws.on("message", function incoming(message) {
+    console.log("received: %s", message);
   });
   // Send initial message
   ws.send(JSON.stringify({ message: "Welcome!" }));
@@ -100,7 +108,6 @@ wss.on("connection", (ws) => {
 server.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });
-
 
 let testValue = [
   {
