@@ -70,7 +70,9 @@
             "
           >
             <div style="display: flex; flex-direction: row">
-              <p>Key (ttl)</p>
+              <p id="key-name"></p>
+              <p id="key-ttl"></p>
+              <p id="key-type"></p>
               <button id="button-edit" onclick="editValue()">Edit</button
               ><button
                 id="button-show-value"
@@ -78,7 +80,8 @@
                 onclick="showValue()"
               >
                 Close</button
-              ><button id="button-save" style="display: none">Save</button>
+              ><button onclick="saveData()" id="button-save" style="display: none">Save</button>
+              <p id="error-p" style="color: red;"></p>
             </div>
             <div
               id="edit-value-div"
@@ -90,11 +93,9 @@
                 flex-direction: column;
               "
             >
-              <textarea style="flex: 1"></textarea><button>Clear</button>
+              <textarea oninput="onValueChange()" style="flex: 1" id="input-value-textarea"></textarea><button>Clear</button>
             </div>
             <div id="value-div" style="">
-              adasds adas a dsa dsa dsa dasd sadsa dsad adsadasd sad sadsa dsa
-              dsa dsad sa dsa da dsad sa dsd sa dasd sad ad sad asd
             </div>
           </div>
           <div
@@ -127,6 +128,11 @@
     <p id="data">Waiting for updates...</p>
 
     <script>
+      window.onload = function() {
+   // code to execute on the page load
+   initSocket();
+}
+
       
     </script>
   </body>
