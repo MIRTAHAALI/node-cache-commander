@@ -40,6 +40,7 @@
           <ul id="myUL">
             <li>
               <span class="caret">Beverages</span>
+              
               <ul class="nested">
                 <li>Water</li>
                 <li>Coffee</li>
@@ -57,7 +58,7 @@
           "
         >
           <div style="width: 100%; display: flex; justify-content: right">
-            <button onclick="settingToggleFunc()">Settings</button>
+            <!-- <button onclick="settingToggleFunc()">Settings</button> -->
           </div>
           <div
             id="main-div"
@@ -74,7 +75,10 @@
               <p id="key-ttl"></p>
               <p id="key-type"></p>
               <button id="button-edit" onclick="editValue()">Edit</button
-              ><button
+              >
+              <button id="button-delete" onclick="deleteValue()">Delete</button
+                >
+              <button
                 id="button-show-value"
                 style="display: none"
                 onclick="showValue()"
@@ -111,14 +115,15 @@
             "
           >
             <div>
-              <p>Settings</p>
+              <button onclick="settingToggleFunc(true)">Close</button>
+              <p id="">Settings</p>
               <p>Stats</p>
-              <p>keys</p>
-              <p>hits</p>
-              <p>misses</p>
-              <p>ksize</p>
-              <p>vsize</p>
-              <button>Flush All</button>
+              <p id="p-keys">keys</p>
+              <p id="p-hits">hits</p>
+              <p id="p-misses">misses</p>
+              <p id="p-ksize">ksize</p>
+              <p id="p-vsize">vsize</p>
+              <button onclick="flushAll()">Flush All</button>
             </div>
           </div>
         </div>

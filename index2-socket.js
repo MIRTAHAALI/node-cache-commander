@@ -14,7 +14,7 @@ const PASSWORD = "password";
 const jwt_secret = `${USERNAME}-${PASSWORD}-${Math.random()}`;
 const obj = { my: "Special", variable: 42 };
 myCache.set("myKey", obj, 10000);
-myCache2.set("myKey", 'Taha', 10000);
+myCache2.set("myKey", "Taha", 10000);
 myCache2.set("myKey2", 2, 10000);
 const nodechaches = [
   {
@@ -28,11 +28,8 @@ const nodechaches = [
     keys: myCache2.keys(),
   },
 ];
-function initResponse(ws) {
-  const n = nodechaches.map((nc) => ({ name: nc.name, keys: nc.keys }));
 
-  ws.send(JSON.stringify({ m: "init-tree", data: n }));
-}
+
 
 const PORT = 3000;
 
@@ -105,6 +102,11 @@ const server = http.createServer((req, res) => {
 const wss = new WebSocket.Server({ server });
 
 wss.on("connection", (ws, req) => {
+  function initResponse() {
+    const n = nodechaches.map((nc) => ({ name: nc.name, keys: nc.v.keys() }));
+  
+    ws.send(JSON.stringify({ m: "init-tree", data: n }));
+  }
   console.log("Client connected");
   const queryParams = url.parse(req.url, true).query;
   const token = queryParams.t;
@@ -135,12 +137,49 @@ wss.on("connection", (ws, req) => {
         }
       }
     }
-    if (data.m == "update-value"){
-      for (const n of nodechaches)
-      {
-        if (n.name == data.parent)
-        {
+    if (data.m == "update-value") {
+      for (const n of nodechaches) {
+        if (n.name == data.parent) {
           n.v.set(data.key, data.v, data.ttl);
+          break;
+        }
+      }
+    }
+    if (data.m == "get-node-values") {
+      for (const n of nodechaches) {
+        if (n.name == data.name) {
+          try {
+            const dt = n.v.getStats();
+            console.log(dt)
+            ws.send(
+              JSON.stringify({
+                m: data.m,
+                key: n.name,
+                v: dt,
+              })
+            );
+            break;
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      }
+    }
+    if (data.m == "flush-instance"){
+      for (const n of nodechaches) {
+        if (n.name == data.name) {
+          n.v.flushAll();
+          initResponse()
+          break;
+        }
+      }
+    }
+
+    if (data.m == "delete-value"){
+      for (const n of nodechaches) {
+        if (n.name == data.parent) {
+          n.v.del(data.key);
+          initResponse()
           break;
         }
       }
