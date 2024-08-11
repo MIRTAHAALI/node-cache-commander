@@ -112,12 +112,15 @@ function resetList(data) {
     const ul = document.createElement("ul");
     ul.id = "UL-" + d.name;
     const li = document.createElement("li");
-
+    li.className = 'li-1'
     const span = document.createElement("span");
     const button = document.createElement("button");
     const buttonIdPrefix = "button-set-";
     button.id = buttonIdPrefix + d.name;
-    button.textContent = "Setting";
+    button.className = "image-button";
+    const buttonImage = document.createElement("Img");
+    buttonImage.src = "image/settings.png";
+    button.appendChild(buttonImage);
     function onClickShowSetting(e) {
       console.log(e.target.id);
       recentCacheInstance = d.name;
