@@ -64,16 +64,14 @@ function hasDuplicateNames(arr) {
 }
 
 function onClickCache(event) {
-  const textContent = event.target.textContent;
-
-  console.log("Clicked item text:", textContent);
-  console.log(event.target.parentNode.id);
+  const textContent = event.getAttribute('data-key-name');
+  const parent = event.getAttribute('data-child-key');
   recentKey = textContent;
-  recentParent = event.target.parentNode.id;
+  recentParent = parent;
   socket.send(
     JSON.stringify({
       m: "get-value",
-      parent: event.target.parentNode.id,
+      parent: parent,
       key: textContent,
     })
   );
@@ -159,6 +157,27 @@ function resetList(data) {
   }
   initToggler();
 }
+
+function resetList2(data) {
+  const mainDiv = document.getElementById("div-list");
+  mainDiv.innerHTML = null;
+  const hasDuplicate = hasDuplicateNames(data);
+  if (hasDuplicate) {
+    alert("Node-Cache instance have duplicate name, please rename them");
+    throw "Duplicate";
+  }
+  for (const d of data) {
+
+    mainDiv.innerHTML += `<div class="instance-div" ><div data-parent-key="${d.name}" data-hide-child="0" onclick="hideUnhideChild(this)" style="display: flex;"><img src="image/folder.png" class="instance-div-image-left" /><p class="instance-div-text">${d.name}</p></div><button class="instance-div-setting-button" onclick="sett(this)"><img src="image/settings.png" class="instance-div-image-right" /></button></div>`
+    
+
+    for (const k of d.keys) {
+      mainDiv.innerHTML += `<div  data-key-name="${k}" onclick="onClickCache(this)" class="instance-div-child" data-child-key="${d.name}"><img src="image/arrow-right.png" class="instance-div-child-image" /><p class="instance-div-child-text">${k}</p></div>`
+    }
+    
+  }
+  initToggler();
+}
 function isNumeric(str) {
   if (typeof str != "string") return false; // we only process strings!
   return (
@@ -230,7 +249,7 @@ function initSocket() {
   socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
     if (data.m == "init-tree") {
-      resetList(data.data);
+      resetList2(data.data);
       hideMainDiv(true)
       console.log(data.data);
     }
