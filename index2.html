@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Real-Time Updates with WebSocket</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/styles2.css" />
     <script type="text/javascript" src="/js/script.js"></script>
+    <script type="text/javascript" src="/js/script2.js"></script>
+    
   </head>
   <body style="margin: 0">
     <div style="display: flex; flex-direction: column; height: 100vh; gap: 30px;">
@@ -35,10 +38,12 @@
           "
         >
        
-          <div style="width: auto">
+          <!-- <div style="width: auto">
             <input style="width: 100%" placeholder="Search" />
-          </div>
-          <div style="background-color: yellow;display: flex;justify-content: space-between;"><div style="display: flex;"><img src="image/settings.png" /><p>Beverage</p></div><button>S</button></div>
+          </div> -->
+          <div class="instance-div" ><div data-parent-key="parent" data-hide-child="0" onclick="hideUnhideChild(this)" style="display: flex;"><img src="image/folder.png" class="instance-div-image-left" /><p class="instance-div-text">Beverage</p></div><button class="instance-div-setting-button" onclick="sett(this)"><img src="image/settings.png" class="instance-div-image-right" /></button></div>
+          <div class="instance-div-child" data-child-key="parent"><img src="image/arrow-right.png" class="instance-div-child-image" /><p class="instance-div-child-text">my-key</p></div>
+
           <ul id="myUL">
             <li>
               <span class="caret">Beverages</span>
@@ -76,17 +81,18 @@
               <p id="key-name"></p>
               <p id="key-ttl"></p>
               <p id="key-type"></p>
-              <button id="button-edit" onclick="editValue()">Edit</button
+              <button class="button-class" id="button-edit" onclick="editValue()">Edit</button
               >
-              <button id="button-delete" onclick="deleteValue()">Delete</button
+              <button class="button-class" id="button-delete" onclick="deleteValue()">Delete</button
                 >
               <button
+              class="button-class"
                 id="button-show-value"
                 style="display: none"
                 onclick="showValue()"
               >
                 Close</button
-              ><button onclick="saveData()" id="button-save" style="display: none">Save</button>
+              ><button class="button-class" onclick="saveData()" id="button-save" style="display: none">Save</button>
               <p id="error-p" style="color: red;"></p>
             </div>
             <div
