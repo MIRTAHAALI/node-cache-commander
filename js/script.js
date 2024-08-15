@@ -64,6 +64,7 @@ function hasDuplicateNames(arr) {
 }
 
 function onClickCache(event) {
+  settingToggleFunc(true);
   const textContent = event.getAttribute('data-key-name');
   const parent = event.getAttribute('data-child-key');
   recentKey = textContent;
@@ -158,6 +159,17 @@ function resetList(data) {
   initToggler();
 }
 
+function onClickShowSetting(event) {
+  hideMainDiv(true)
+  recentCacheInstance = event.getAttribute('data-instance');
+  socket.send(
+    JSON.stringify({
+      m: "get-node-values",
+      name: recentCacheInstance,
+    })
+  );
+  settingToggleFunc(false);
+}
 function resetList2(data) {
   const mainDiv = document.getElementById("div-list");
   mainDiv.innerHTML = null;
@@ -166,10 +178,13 @@ function resetList2(data) {
     alert("Node-Cache instance have duplicate name, please rename them");
     throw "Duplicate";
   }
+
   for (const d of data) {
 
-    mainDiv.innerHTML += `<div class="instance-div" ><div data-parent-key="${d.name}" data-hide-child="0" onclick="hideUnhideChild(this)" style="display: flex;"><img src="image/folder.png" class="instance-div-image-left" /><p class="instance-div-text">${d.name}</p></div><button class="instance-div-setting-button" onclick="sett(this)"><img src="image/settings.png" class="instance-div-image-right" /></button></div>`
     
+    mainDiv.innerHTML += `<div class="instance-div" ><div data-parent-key="${d.name}" data-hide-child="0" onclick="hideUnhideChild(this)" style="display: flex;"><img src="image/folder.png" class="instance-div-image-left" /><p class="instance-div-text">${d.name}</p></div><button class="instance-div-setting-button" data-instance="${d.name}" onclick="onClickShowSetting(this)"><img src="image/settings.png" class="instance-div-image-right" /></button></div>`
+ 
+
 
     for (const k of d.keys) {
       mainDiv.innerHTML += `<div  data-key-name="${k}" onclick="onClickCache(this)" class="instance-div-child" data-child-key="${d.name}"><img src="image/arrow-right.png" class="instance-div-child-image" /><p class="instance-div-child-text">${k}</p></div>`
@@ -257,7 +272,7 @@ function initSocket() {
       console.log(data);
       hideMainDiv(false)
       console.log(typeof data.v);
-      document.getElementById("value-div").innerHTML =
+      document.getElementById("value-div-p").innerHTML =
         typeof data.v == "object" ? JSON.stringify(data.v) : data.v;
       document.getElementById("key-name").innerHTML = `${data.key}`;
       document.getElementById("key-ttl").innerHTML = data.ttl;

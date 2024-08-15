@@ -17,21 +17,22 @@ ul {
 }
 
 .sub-list {
-    margin-left: 40px;
-    cursor: pointer;
-    color: rgb(45, 23, 96);
-    transition: 0.2s;
-    margin-bottom: 5px;
+  margin-left: 40px;
+  cursor: pointer;
+  color: rgb(45, 23, 96);
+  transition: 0.2s;
+  margin-bottom: 5px;
 }
 
-.sub-list:hover{
+.sub-list:hover {
   color: blue;
 }
 
 .li-1 {
-  
+
   width: 100%;
 }
+
 .caret {
   cursor: pointer;
   font-weight: bold;
@@ -87,7 +88,7 @@ ul {
   justify-content: center;
 }
 
-#div-list{
+#div-list {
   padding-top: 20px;
   margin: 5px;
   font-family: Arial, Helvetica, sans-serif;
@@ -95,14 +96,34 @@ ul {
   box-shadow: 4px 4px 25px rgba(128, 128, 128, 0.344);
   border-radius: 20px
 }
-#main-div{
+
+#main-div {
   padding-top: 20px;
   margin: 5px;
+  height: 100%;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #F6EACB;
   box-shadow: -4px -4px 25px rgba(128, 128, 128, 0.344);
   border-radius: 20px
 }
+
+#setting-div {
+  padding-top: 20px;
+  margin: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F6EACB;
+  box-shadow: -4px -4px 25px rgba(128, 128, 128, 0.344);
+  border-radius: 20px;
+  padding: 20px;
+  display: none;
+  flex-direction: row;
+
+  align-items: center;
+}
+
 .image-button {
   background: none;
   border: none;
@@ -116,16 +137,30 @@ ul {
   background-color: #179BAE;
 }
 
-.image-button:hover{
+.image-button:hover {
   background-color: #127c8c;
 }
+
 .image-button img {
-  width: 15px; /* Adjust size as needed */
+  width: 15px;
+  /* Adjust size as needed */
   height: 15px;
 }
 
 @media (max-width: 480px) {
-  .menubar {
-    background-color: yellow;
-  }
+  .menubar {}
+}
+
+
+
+table {
+
+  min-width: 200px;
+  max-height: 100px;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+.row-value-p {
+  margin: 5px;
 }

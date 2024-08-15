@@ -1,6 +1,6 @@
 .instance-div{
     background-color: #134B70;display: flex;justify-content: space-between; border-radius: 4px;
-    
+    transition: 0.4s;
     margin-top: 5px;
 }
 .instance-div-image-left{
@@ -21,7 +21,7 @@
     
 }
 .instance-div:hover{
-    background-color: #201E43;
+    background-color: #0f3d5c;
 }
 
 
@@ -30,6 +30,7 @@
     background-color: #EEEEEE;
     cursor: pointer;
     border-bottom: 1px solid rgba(128, 128, 128, 0.486);
+    transition: 0.3s;
 }
 .instance-div-child-image{
     height: 20px; width: auto;align-self: center;margin-right: 5px;
@@ -51,5 +52,11 @@
     font-weight: bold;
     padding: 10px;
     margin-left: 5px;
+    transition: 0.3s;
     box-shadow: 4px 4px 20px rgba(128, 128, 128, 0.369);
 }
+
+.button-class:hover{
+    box-shadow: 4px 4px 20px rgba(84, 84, 84, 0.774);   
+}
+
