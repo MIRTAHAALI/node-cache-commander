@@ -13,7 +13,7 @@ function addNodeCacheInstance(n)
   nodechaches.push(n);
 }
 
-function initializeNodeCacheManager(PORT, USERNAME, PASSWORD) {
+function initializeNodeCacheCtrl(PORT, USERNAME, PASSWORD) {
   const jwt_secret = `${USERNAME}-${PASSWORD}-${Math.random()}`;
   const server = http.createServer((req, res) => {
     const auth = req.headers.authorization;
@@ -186,6 +186,6 @@ function initializeNodeCacheManager(PORT, USERNAME, PASSWORD) {
 }
 
 module.exports = {
-  initializeNodeCacheManager,
+  initializeNodeCacheCtrl,
   addNodeCacheInstance
 };
