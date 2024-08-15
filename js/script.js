@@ -5,17 +5,7 @@ let updatedValue = null;
 let recentParent = null;
 let recentKey = null;
 let recentTTL = null;
-function initToggler() {
-  var toggler = document.getElementsByClassName("caret");
-  var i;
 
-  for (i = 0; i < toggler.length; i++) {
-    toggler[i].addEventListener("click", function () {
-      this.parentElement.querySelector(".nested").classList.toggle("active");
-      this.classList.toggle("caret-down");
-    });
-  }
-}
 
 function hideMainDiv(hide)
 {
@@ -89,7 +79,6 @@ function deleteValue(){
 }
 
 function flushAll() {
-  console.log(recentCacheInstance);
   settingToggleFunc(true)
   socket.send(
     JSON.stringify({
@@ -99,65 +88,7 @@ function flushAll() {
   );
 }
 
-function resetList(data) {
-  const mainDiv = document.getElementById("div-list");
-  mainDiv.innerHTML = null;
-  const hasDuplicate = hasDuplicateNames(data);
-  if (hasDuplicate) {
-    alert("Node-Cache instance have duplicate name, please rename them");
-    throw "Duplicate";
-  }
-  for (const d of data) {
-    const ul = document.createElement("ul");
-    ul.id = "UL-" + d.name;
-    const li = document.createElement("li");
-    li.className = 'li-1'
-    const span = document.createElement("span");
-    const button = document.createElement("button");
-    const buttonIdPrefix = "button-set-";
-    button.id = buttonIdPrefix + d.name;
-    button.className = "image-button";
-    const buttonImage = document.createElement("Img");
-    buttonImage.src = "image/settings.png";
-    button.appendChild(buttonImage);
-    function onClickShowSetting(e) {
-      console.log(e.target.id);
-      recentCacheInstance = d.name;
-      socket.send(
-        JSON.stringify({
-          m: "get-node-values",
-          name: e.target.id.replace(buttonIdPrefix, ""),
-        })
-      );
-      settingToggleFunc(false);
-    }
-    button.addEventListener("click", onClickShowSetting, false);
-    span.className = "caret";
-    span.textContent = d.name;
-    // Create the nested <ul> element
-    const nestedUl = document.createElement("ul");
-    nestedUl.className = "nested";
-    nestedUl.id = d.name;
-    for (const k of d.keys) {
-      const liW = document.createElement("li");
-      liW.textContent = k;
-      liW.className = "sub-list";
-      liW.onclick = onClickCache;
-      nestedUl.appendChild(liW);
-    }
-    li.appendChild(span);
-    li.appendChild(button);
-    li.appendChild(nestedUl);
 
-    // Append the first <li> to the main <ul>
-    ul.appendChild(li);
-    // Find the <div> with id "main"
-
-    // Append the <ul> to the <div>
-    mainDiv.appendChild(ul);
-  }
-  initToggler();
-}
 
 function onClickShowSetting(event) {
   hideMainDiv(true)
@@ -172,7 +103,9 @@ function onClickShowSetting(event) {
 }
 function resetList2(data) {
   const mainDiv = document.getElementById("div-list");
+  
   mainDiv.innerHTML = null;
+  mainDiv.innerHTML += `<div style="padding: 10px;width: cover;border-radius: 5px;background-color:black;color:white;font-weight: bold;font-size: 20px;">Instances</div>`
   const hasDuplicate = hasDuplicateNames(data);
   if (hasDuplicate) {
     alert("Node-Cache instance have duplicate name, please rename them");
@@ -191,7 +124,7 @@ function resetList2(data) {
     }
     
   }
-  initToggler();
+
 }
 function isNumeric(str) {
   if (typeof str != "string") return false; // we only process strings!
@@ -252,13 +185,13 @@ function onValueChange() {
     if (!err) document.getElementById("error-p").innerHTML = "";
     return err;
   } catch (e) {
-    console.log(e);
+    
   }
 }
 
 function initSocket() {
   const token = document.getElementById("jwt-id-p").innerHTML;
-  console.log(token);
+  
   const socketUrl = `ws://localhost:3000?t=${token}`;
   socket = new WebSocket(socketUrl);
   socket.onmessage = (event) => {
@@ -266,12 +199,12 @@ function initSocket() {
     if (data.m == "init-tree") {
       resetList2(data.data);
       hideMainDiv(true)
-      console.log(data.data);
+     
     }
     if (data.m == "get-value") {
-      console.log(data);
+      
       hideMainDiv(false)
-      console.log(typeof data.v);
+      
       document.getElementById("value-div-p").innerHTML =
         typeof data.v == "object" ? JSON.stringify(data.v) : data.v;
       document.getElementById("key-name").innerHTML = `${data.key}`;
@@ -285,7 +218,7 @@ function initSocket() {
     }
 
     if (data.m == "get-node-values") {
-      console.log(data);
+      
       const hits = data.v.hits;
       const keys = data.v.keys;
       const ksize = data.v.ksize;
@@ -303,4 +236,21 @@ function initSocket() {
   socket.onerror = (error) => {
     console.error("WebSocket Error:", error);
   };
+}
+function hideUnhideChild(item) {
+  const s = item.getAttribute("data-parent-key");
+  const h = item.getAttribute("data-hide-child");
+  const elements = document.querySelectorAll(`[data-child-key="${s}"]`);
+  for (const e of elements) {
+    if (h == "0") {
+      e.style.display = "none";
+      item.setAttribute("data-hide-child", "1");
+    } else {
+      e.style.display = "flex";
+      item.setAttribute("data-hide-child", "0");
+    }
+  }
+}
+function sett() {
+  
 }

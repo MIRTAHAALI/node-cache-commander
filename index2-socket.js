@@ -107,7 +107,6 @@ wss.on("connection", (ws, req) => {
   
     ws.send(JSON.stringify({ m: "init-tree", data: n }));
   }
-  console.log("Client connected");
   const queryParams = url.parse(req.url, true).query;
   const token = queryParams.t;
   try {
@@ -118,7 +117,6 @@ wss.on("connection", (ws, req) => {
   }
 
   ws.on("message", function incoming(message) {
-    console.log("received: %s", message);
     const data = JSON.parse(message);
     if (data.m == "get-value") {
       for (const n of nodechaches) {
@@ -150,7 +148,6 @@ wss.on("connection", (ws, req) => {
         if (n.name == data.name) {
           try {
             const dt = n.v.getStats();
-            console.log(dt)
             ws.send(
               JSON.stringify({
                 m: data.m,
@@ -160,7 +157,7 @@ wss.on("connection", (ws, req) => {
             );
             break;
           } catch (e) {
-            console.log(e);
+            
           }
         }
       }
@@ -199,7 +196,6 @@ wss.on("connection", (ws, req) => {
   // Clean up when the connection is closed
   ws.on("close", () => {
     clearInterval(intervalId);
-    console.log("Client disconnected");
   });
 });
 
