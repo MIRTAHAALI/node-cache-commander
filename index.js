@@ -26,7 +26,13 @@ const nodechaches = [
   },
 ];
 
-function initFrontEnd(PORT, USERNAME, PASSWORD) {
+function addNodeCacheInstance(n)
+{
+  n.keys = n.keys();
+  nodechaches.push(n);
+}
+
+function initializeNodeCacheManager(PORT, USERNAME, PASSWORD) {
   const jwt_secret = `${USERNAME}-${PASSWORD}-${Math.random()}`;
   const server = http.createServer((req, res) => {
     const auth = req.headers.authorization;
@@ -199,5 +205,6 @@ function initFrontEnd(PORT, USERNAME, PASSWORD) {
 }
 
 module.exports = {
-  initFrontEnd,
+  initializeNodeCacheManager,
+  addNodeCacheInstance
 };
