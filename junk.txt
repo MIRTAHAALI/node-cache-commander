@@ -1,0 +1,17 @@
+I always forgot how to do some stuff, so saving here for my reminder...
+
+How to test npm package locally before publishing to npm
+
+Navigate to your package directory:
+cd /path/to/your/package
+Run npm link to create a global symlink:
+
+npm link
+Navigate to your project where you want to test the package:
+
+cd /path/to/your/project
+Run npm link your-package-name:
+
+npm link your-package-name
+
+Replace your-package-name with the name of your package as specified in the package.json.
