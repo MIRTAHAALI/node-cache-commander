@@ -3,32 +3,13 @@ const WebSocket = require("ws");
 const path = require("path");
 const url = require("url");
 const fs = require("fs");
-const NodeCache = require("node-cache");
-const myCache = new NodeCache();
-const myCache2 = new NodeCache();
 var jwt = require("jsonwebtoken");
-// Define username and password
-
-const obj = { my: "Special", variable: 42 };
-myCache.set("myKey", obj, 10000);
-myCache2.set("myKey", "Taha", 10000);
-myCache2.set("myKey2", 2, 10000);
-const nodechaches = [
-  {
-    name: "data1",
-    v: myCache,
-    keys: myCache.keys(),
-  },
-  {
-    name: "data2",
-    v: myCache2,
-    keys: myCache2.keys(),
-  },
-];
-
+const nodechaches = [];
+// name: "data2",
+//     v: myCache2,
 function addNodeCacheInstance(n)
 {
-  n.keys = n.keys();
+  n.keys = n.v.keys();
   nodechaches.push(n);
 }
 
