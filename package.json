@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^9.0.2",
-    "node-cache": "^5.1.2",
     "ws": "^8.18.0"
   },
   "repository": {
