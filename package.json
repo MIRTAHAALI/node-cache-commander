@@ -6,11 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "MIRTAHAALI",
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^9.0.2",
     "node-cache": "^5.1.2",
     "ws": "^8.18.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MIRTAHAALI/node-cache-ui"
+  },
+  "homepage": "https://github.com/MIRTAHAALI/node-cache-ui"
 }
