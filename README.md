@@ -1,7 +1,8 @@
 # Node-Cache Commander
-## A simple manager for node-cache... 
 
-Node-Cache Commander can be visualize storage by node-cache. I can be use to delete and update values. 
+## A simple manager for node-cache...
+
+Node-Cache Commander, a front-end to visualize storage managed by node-cache. It can be used to delete and update values of node-cache on a server.
 
 Connect with author : [https://www.linkedin.com/in/mir-taha-a40bb270/]
 
@@ -11,13 +12,12 @@ Connect with author : [https://www.linkedin.com/in/mir-taha-a40bb270/]
 - Live Update/Delete Values
 - User/Password Authentication on front end
 - Type Secure
+- Auth based socket connection for read/write purpose
 
-<!-- 
-
-##  Installation
+## Installation
 
 ```npm
-npm install json-case-convertor
+npm install node-cache-commander
 ```
 
 ## 🚀 Usage
@@ -25,5 +25,6 @@ npm install json-case-convertor
 Import:
 
 ```javascript
-const jcc = require('json-case-convertor')
-``` -->
+const jcc = require("node-cache-commander");
+```
+
