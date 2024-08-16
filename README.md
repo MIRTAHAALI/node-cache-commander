@@ -13,6 +13,8 @@ Connect with author : [https://www.linkedin.com/in/mir-taha-a40bb270/]
 - User/Password Authentication on front end
 - Type Secure
 - Auth based socket connection for read/write purpose
+- Flush All Data
+- Get Instance Status
 
 ## Installation
 
