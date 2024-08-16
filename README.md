@@ -54,3 +54,6 @@ addNodeCacheInstance({ name: "Node-instance-2", v: myCache2 }); //Add instance t
 ```
 
 Open web browser and run http://localhost:3000
+
+
+![Example](https://github.com/MIRTAHAALI/node-cache-commander/blob/main/image/example.gif)
