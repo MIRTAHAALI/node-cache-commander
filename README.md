@@ -27,7 +27,10 @@ npm install node-cache-commander
 Import:
 
 ```javascript
-const jcc = require("node-cache-commander");
+const {
+  initializeNodeCacheCommander, //Initialize node-cache-commander web server
+  addNodeCacheInstance, // Adds instance of node-cache to monitor
+} = require("node-cache-commander");
 ```
 
 ### Example
