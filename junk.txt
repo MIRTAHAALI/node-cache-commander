@@ -15,3 +15,17 @@ Run npm link your-package-name:
 npm link your-package-name
 
 Replace your-package-name with the name of your package as specified in the package.json.
+
+
+How to use gdrive file image as image link
+
+Find the uploaded image in your Google Drive.
+Right-click on the image file and select "Get link."
+In the sharing settings window, under "Get Link," click on "Anyone with the link" (or ensure that the link sharing is set to "Anyone with the link" and "Viewer" access). This makes your file accessible to anyone with the link.
+https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+To create a direct link to the image (so it can be embedded or directly viewed), you need to format the URL as follows:
+https://drive.google.com/uc?export=view&id=FILE_ID
+
+
+How to auto publish to npm
+Copy this .github action to reprository
