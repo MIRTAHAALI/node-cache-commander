@@ -3,7 +3,7 @@
   height: 50px;
   padding-top: 10px;
   padding-bottom: 10px;
-  box-shadow: 4px 4px 25px rgba(128, 128, 128, 0.344);
+  box-shadow: 0px 4px 5px rgba(128, 128, 128, 0.344);
   background-color: #eff6fc;
   display: flex;
   justify-content: space-between;
@@ -21,29 +21,61 @@
   padding-top: 20px;
   margin: 5px;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #D1E9F6;
+  background-color: #d1e9f6;
   box-shadow: 4px 4px 25px rgba(128, 128, 128, 0.344);
-  border-radius: 20px
+  border-radius: 0px;
 }
 
 #main-div {
   padding: 20px;
   margin: 5px;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #F6EACB;
-  box-shadow: -4px -4px 25px rgba(128, 128, 128, 0.344);
-  border-radius: 20px
+  background-color: #134b70; /*  #F6EACB; */
+  box-shadow: 1px 4px 15px rgba(128, 128, 128, 0.344);
+  border-radius: 10px;
+}
+
+#key-table {
+  background-color: white;
+  border: yellowgreen;
+  border-style: solid;
+}
+
+.copy-right{
+  font-size: 7px;
+  color: #e2e2e2;
+  text-align: center;
+  margin-top: 10px;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#value-div {
+  background-color: white;
+  padding: 5px;
+  border: yellowgreen;
+  border-style: solid;
+  border-radius: 5px;
+  height: 90%;
 }
 
 #setting-div {
   padding-top: 20px;
   margin: 5px;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #F6EACB;
+  background-color: #f6eacb;
   box-shadow: -4px -4px 25px rgba(128, 128, 128, 0.344);
   border-radius: 20px;
   padding: 20px;
@@ -62,8 +94,8 @@
   outline: none;
   padding-top: 4px;
   border-radius: 5px;
-  border: 1px solid #179BAE;
-  background-color: #179BAE;
+  border: 1px solid #179bae;
+  background-color: #179bae;
 }
 
 .image-button:hover {
@@ -77,13 +109,11 @@
 }
 
 @media (max-width: 480px) {
-  .menubar {}
+  .menubar {
+  }
 }
 
-
-
 table {
-
   min-width: 200px;
   max-height: 100px;
   border-spacing: 0;
@@ -94,52 +124,68 @@ table {
   margin: 5px;
 }
 
-.instance-div{
-  background-color: #134B70;display: flex;justify-content: space-between; border-radius: 4px;
+.instance-div {
+  background-color: #134b70;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 4px;
   transition: 0.4s;
   margin-top: 5px;
 }
-.instance-div-image-left{
-  margin-left: 5px;height: 20px; width: auto;align-self: center;margin-right: 5px;
+.instance-div-image-left {
+  margin-left: 5px;
+  height: 20px;
+  width: auto;
+  align-self: center;
+  margin-right: 5px;
 }
-.instance-div-image-right{
-  height: 20px
+.instance-div-image-right {
+  height: 20px;
 }
-.instance-div-setting-button{
-  height: 30px;width: 30px;padding: 0;background-color: #134B70;margin-right: 5px;border: 0;align-self: center;
+.instance-div-setting-button {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  background-color: #134b70;
+  margin-right: 5px;
+  border: 0;
+  align-self: center;
   border-radius: 4px;
   cursor: pointer;
   z-index: 100;
 }
-.instance-div-text{
+.instance-div-text {
   color: white;
   cursor: pointer;
-  
 }
-.instance-div:hover{
+.instance-div:hover {
   background-color: #0f3d5c;
 }
 
-
-.instance-div-child{
-  padding-left: 30px;display: flex;justify-content: left;
-  background-color: #EEEEEE;
+.instance-div-child {
+  padding-left: 30px;
+  display: flex;
+  justify-content: left;
+  background-color: #eeeeee;
   cursor: pointer;
   border-bottom: 1px solid rgba(128, 128, 128, 0.486);
   transition: 0.3s;
 }
-.instance-div-child-image{
-  height: 20px; width: auto;align-self: center;margin-right: 5px;
+.instance-div-child-image {
+  height: 20px;
+  width: auto;
+  align-self: center;
+  margin-right: 5px;
 }
-.instance-div-child-text{
+.instance-div-child-text {
   margin: 5px;
 }
-.instance-div-child:hover{
+.instance-div-child:hover {
   background-color: #d0d0d0;
 }
 
-.button-class{
-  background-color: #8D493A;
+.button-class {
+  background-color: #8d493a;
   color: white;
   border-radius: 5px;
   border: 0;
@@ -152,7 +198,6 @@ table {
   box-shadow: 4px 4px 20px rgba(128, 128, 128, 0.369);
 }
 
-.button-class:hover{
-  box-shadow: 4px 4px 20px rgba(84, 84, 84, 0.774);   
+.button-class:hover {
+  box-shadow: 4px 4px 20px rgba(84, 84, 84, 0.774);
 }
-

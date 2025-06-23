@@ -7,8 +7,7 @@ var jwt = require("jsonwebtoken");
 const nodechaches = [];
 // name: "data2",
 //     v: myCache2,
-function addNodeCacheInstance(n)
-{
+function addNodeCacheInstance(n) {
   n.keys = n.v.keys();
   nodechaches.push(n);
 }
@@ -187,5 +186,5 @@ function initializeNodeCacheCommander(PORT, USERNAME, PASSWORD) {
 
 module.exports = {
   initializeNodeCacheCommander,
-  addNodeCacheInstance
+  addNodeCacheInstance,
 };

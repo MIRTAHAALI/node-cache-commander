@@ -9,7 +9,9 @@
     <script type="text/javascript" src="/js/script.js"></script>
   </head>
   <body style="margin: 0">
-    <div style="display: flex; flex-direction: column; height: 100vh; gap: 30px;">
+    <div
+      style="display: flex; flex-direction: column; height: 100vh; gap: 10px"
+    >
       <div class="menubar">
         <div class="menubar-left"></div>
         <img src="image/logo.png" />
@@ -20,74 +22,90 @@
           display: flex;
           flex-direction: row;
           width: 100%;
-          gap: 30px;
+          gap: 10px;
           height: 800px;
         "
       >
         <div
           id="div-list"
-          style="
-            width: 20%;
-            min-width: 200px;
-            
-            height: 100%;
-            overflow: auto;
-          "
+          style="width: 20%; min-width: 200px; height: 100%; overflow: auto"
         >
-       
-  
-          <div class="instance-div" ><div data-parent-key="parent" data-hide-child="0" onclick="hideUnhideChild(this)" style="display: flex;"><img src="image/folder.png" class="instance-div-image-left" /><p class="instance-div-text">Beverage</p></div><button class="instance-div-setting-button" onclick="sett(this)"><img src="image/settings.png" class="instance-div-image-right" /></button></div>
-          <div class="instance-div-child" data-child-key="parent"><img src="image/arrow-right.png" class="instance-div-child-image" /><p class="instance-div-child-text">my-key</p></div>
-
-
+          <div class="instance-div">
+            <div
+              data-parent-key="parent"
+              data-hide-child="0"
+              onclick="hideUnhideChild(this)"
+              style="display: flex"
+            >
+              <img src="image/folder.png" class="instance-div-image-left" />
+              <p class="instance-div-text">Beverage</p>
+            </div>
+            <button class="instance-div-setting-button" onclick="sett(this)">
+              <img src="image/settings.png" class="instance-div-image-right" />
+            </button>
+          </div>
+          <div class="instance-div-child" data-child-key="parent">
+            <img src="image/arrow-right.png" class="instance-div-child-image" />
+            <p class="instance-div-child-text">my-key</p>
+          </div>
         </div>
         <div
-          style="
-            flex: 1;
-            
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-          "
+          style="flex: 1; height: 100%; display: flex; flex-direction: column"
         >
           <div style="width: 100%; display: flex; justify-content: right">
             <!-- <button onclick="settingToggleFunc()">Settings</button> -->
           </div>
-          <div
-            id="main-div"
-          >
+          <div id="main-div">
             <div style="display: flex; flex-direction: column">
-              <table >
-                <tr>
-                  <td style="font-weight: bold;">Key: </td>
-                  <td><p class="row-value-p" id="key-name"></p></td>
+              <table id="key-table">
+                <tr class="key-table-row">
+                  <td style="font-weight: bold">Key:</td>
+                  <td><p class="row-value-p" id="key-name">myKey1</p></td>
                 </tr>
-                <tr>
-                  <td style="font-weight: bold;">TTL: </td>
-                  <td><p class="row-value-p" id="key-ttl"></p></td>
+                <tr class="key-table-row">
+                  <td style="font-weight: bold">TTL:</td>
+                  <td><p class="row-value-p" id="key-ttl">1750700630967</p></td>
                 </tr>
-                <tr>
-                  <td style="font-weight: bold;">Type:</td>
-                  <td><p class="row-value-p" id="key-type"></td>
+                <tr class="key-table-row">
+                  <td style="font-weight: bold">Type:</td>
+                  <td><p class="row-value-p" id="key-type">object</p></td>
                 </tr>
-                </table>
-     
+              </table>
 
-              <div><button class="button-class" id="button-edit" onclick="editValue()">Edit</button
-              >
-              
-              <button
-              
-              class="button-class"
-                id="button-show-value"
-                style="display: none; background-color: black;"
-                onclick="showValue()"
-              >
-                Close</button
-              ><button class="button-class" onclick="saveData()" id="button-save" style="display: none; background-color: green;">Save</button>
-              <button class="button-class" style="background-color: rgb(171, 21, 1);" id="button-delete" onclick="deleteValue()">Delete</button
-                ></div>
-              <p id="error-p" style="color: red;"></p>
+              <div>
+                <button
+                  class="button-class"
+                  id="button-edit"
+                  onclick="editValue()"
+                >
+                  Edit
+                </button>
+
+                <button
+                  class="button-class"
+                  id="button-show-value"
+                  style="display: none; background-color: black"
+                  onclick="showValue()"
+                >
+                  Close</button
+                ><button
+                  class="button-class"
+                  onclick="saveData()"
+                  id="button-save"
+                  style="display: none; background-color: green"
+                >
+                  Save
+                </button>
+                <button
+                  class="button-class"
+                  style="background-color: rgb(171, 21, 1)"
+                  id="button-delete"
+                  onclick="deleteValue()"
+                >
+                  Delete
+                </button>
+              </div>
+              <p id="error-p" style="color: red"></p>
             </div>
             <div
               id="edit-value-div"
@@ -98,42 +116,71 @@
                 flex-direction: column;
               "
             >
-              <textarea oninput="onValueChange()" style="flex: 1; margin: 5px;" id="input-value-textarea"></textarea>
-              
+              <textarea
+                oninput="onValueChange()"
+                style="flex: 1; margin: 5px"
+                id="input-value-textarea"
+              ></textarea>
             </div>
-            
-            <div id="value-div" ><div  style="font-weight: bold;margin-bottom: 10px;">Value:</div><p id="value-div-p" style="font-style: italic;"></p>
+
+            <div id="value-div">
+              <div style="font-weight: bold; margin-bottom: 10px">Value:</div>
+              <p id="value-div-p" style="font-style: italic">
+                {"my":"Special","variable":42}
+              </p>
             </div>
+            <p class="copy-right">Copyright © Mir Taha Ali 2025. All rights reserved.</p>
           </div>
-          <div
-            id="setting-div"
-            
-          >
+          <div id="setting-div">
             <div>
-             
-              <p style="font-size: 30px;font-weight: bold;">Settings</p>
-              <p style="font-size: 20px;font-weight: bold;">Stats</p>
+              <p style="font-size: 30px; font-weight: bold">Settings</p>
+              <p style="font-size: 20px; font-weight: bold">Stats</p>
               <table>
-                <tr><td style="font-weight: bold;">keys</td><td><p class="row-value-p" id="p-keys">keys</p></td></tr>
-                <tr><td style="font-weight: bold;">hits</td><td> <p class="row-value-p" id="p-hits">hits</p></td></tr>
-                <tr><td style="font-weight: bold;">misses</td><td><p class="row-value-p" id="p-misses">misses</p></td></tr>
-                <tr><td style="font-weight: bold;">ksize</td><td><p class="row-value-p" id="p-ksize">ksize</p></td></tr>
-                <tr><td style="font-weight: bold;">vsize</td><td><p class="row-value-p" id="p-vsize">vsize</p></td></tr>
+                <tr>
+                  <td style="font-weight: bold">keys</td>
+                  <td><p class="row-value-p" id="p-keys">keys</p></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold">hits</td>
+                  <td><p class="row-value-p" id="p-hits">hits</p></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold">misses</td>
+                  <td><p class="row-value-p" id="p-misses">misses</p></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold">ksize</td>
+                  <td><p class="row-value-p" id="p-ksize">ksize</p></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold">vsize</td>
+                  <td><p class="row-value-p" id="p-vsize">vsize</p></td>
+                </tr>
               </table>
-              <button onclick="flushAll()" style="background-color: rgb(171, 21, 1);" class="button-class">Flush All</button>
-              <button onclick="settingToggleFunc(true)" class="button-class" style="background-color: black;">Close</button>
+              <button
+                onclick="flushAll()"
+                style="background-color: rgb(171, 21, 1)"
+                class="button-class"
+              >
+                Flush All
+              </button>
+              <button
+                onclick="settingToggleFunc(true)"
+                class="button-class"
+                style="background-color: black"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <script>
-      window.onload = function() {
-   // code to execute on the page load
-   initSocket();
-}
-
-      
+      window.onload = function () {
+        // code to execute on the page load
+        initSocket();
+      };
     </script>
   </body>
 </html>
